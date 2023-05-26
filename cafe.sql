@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 10:51 PM
+-- Generation Time: May 26, 2023 at 10:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -138,7 +138,6 @@ CREATE TABLE `order` (
   `B_id` int(11) NOT NULL,
   `Total` float NOT NULL,
   `Order_qty` int(11) NOT NULL,
-  `C_id` int(11) NOT NULL,
   `R_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -146,11 +145,11 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`Order_id`, `B_id`, `Total`, `Order_qty`, `C_id`, `R_id`) VALUES
-(1, 102, 35, 1, 120, 1),
-(2, 110, 35, 1, 121, 2),
-(3, 102, 30, 1, 122, 3),
-(4, 102, 35, 1, 123, 4);
+INSERT INTO `order` (`Order_id`, `B_id`, `Total`, `Order_qty`, `R_id`) VALUES
+(1, 102, 35, 1, 1),
+(2, 110, 35, 1, 2),
+(3, 102, 30, 1, 3),
+(4, 102, 35, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -182,18 +181,18 @@ CREATE TABLE `receipt` (
   `R_id` int(11) NOT NULL,
   `R_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Total` float NOT NULL,
-  `P_name` varchar(20) CHARACTER SET utf8mb4 NOT NULL
+  `E_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `receipt`
 --
 
-INSERT INTO `receipt` (`R_id`, `R_date`, `Total`, `P_name`) VALUES
-(1, '2023-05-19 17:00:00', 35, 'Cashier'),
-(2, '2023-05-19 17:00:00', 35, 'Cashier'),
-(3, '2023-05-19 17:00:00', 30, 'Cashier'),
-(4, '2023-05-19 17:00:00', 35, 'Cashier');
+INSERT INTO `receipt` (`R_id`, `R_date`, `Total`, `E_id`) VALUES
+(1, '2023-05-19 17:00:00', 35, 3),
+(2, '2023-05-19 17:00:00', 35, 1),
+(3, '2023-05-19 17:00:00', 35, 1),
+(4, '2023-05-19 17:00:00', 35, 2);
 
 -- --------------------------------------------------------
 
@@ -259,7 +258,7 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`E_id`),
-  ADD KEY `waiter_FK` (`P_id`);
+  ADD KEY `employee_FK` (`P_id`);
 
 --
 -- Indexes for table `ingredient`
@@ -273,8 +272,7 @@ ALTER TABLE `ingredient`
 ALTER TABLE `order`
   ADD PRIMARY KEY (`Order_id`),
   ADD KEY `fk_beverage_order` (`B_id`),
-  ADD KEY `fk_receipt` (`R_id`),
-  ADD KEY `fk_cusId` (`C_id`);
+  ADD KEY `order_FK` (`R_id`);
 
 --
 -- Indexes for table `position`
@@ -288,7 +286,7 @@ ALTER TABLE `position`
 --
 ALTER TABLE `receipt`
   ADD PRIMARY KEY (`R_id`),
-  ADD KEY `fk_position` (`P_name`);
+  ADD KEY `receipt_FK` (`E_id`);
 
 --
 -- Indexes for table `relation_beverage_ingredient`
@@ -305,21 +303,20 @@ ALTER TABLE `relation_beverage_ingredient`
 -- Constraints for table `employee`
 --
 ALTER TABLE `employee`
-  ADD CONSTRAINT `waiter_FK` FOREIGN KEY (`P_id`) REFERENCES `position` (`P_id`);
+  ADD CONSTRAINT `employee_FK` FOREIGN KEY (`P_id`) REFERENCES `position` (`P_id`);
 
 --
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
   ADD CONSTRAINT `fk_beverage_order` FOREIGN KEY (`B_id`) REFERENCES `beverage` (`B_id`),
-  ADD CONSTRAINT `fk_cusId` FOREIGN KEY (`C_id`) REFERENCES `customer` (`C_id`),
-  ADD CONSTRAINT `fk_receipt` FOREIGN KEY (`R_id`) REFERENCES `receipt` (`R_id`);
+  ADD CONSTRAINT `order_FK` FOREIGN KEY (`R_id`) REFERENCES `receipt` (`R_id`);
 
 --
 -- Constraints for table `receipt`
 --
 ALTER TABLE `receipt`
-  ADD CONSTRAINT `fk_position` FOREIGN KEY (`P_name`) REFERENCES `position` (`P_Name`);
+  ADD CONSTRAINT `receipt_FK` FOREIGN KEY (`E_id`) REFERENCES `employee` (`E_id`);
 
 --
 -- Constraints for table `relation_beverage_ingredient`

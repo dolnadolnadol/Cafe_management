@@ -16,8 +16,11 @@ public class Menu extends JFrame{
     private JButton Btn2 = new JButton("Ingredients");
     private JButton Btn3 = new JButton("Order");
     private JButton Btn4 = new JButton("Employees");
+    private JButton Btn7 = new JButton("Position");
     private JButton Btn5 = new JButton("Customers");
     private JButton Btn6 = new JButton("Receipt");
+
+
     private JFrame frame;
 
     Menu(){
@@ -26,6 +29,10 @@ public class Menu extends JFrame{
 
     private void panels(){       
         frame = new JFrame("หมีภู คาเฟ่");
+        frame.setSize(new Dimension(1000 ,700));
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
         JPanel panel = new JPanel();
         panel.setLayout(null);
         frame.add(panel);
@@ -33,10 +40,10 @@ public class Menu extends JFrame{
 
         JLabel label = new JLabel("หมีภู คาเฟ่");
         Dimension size = label.getPreferredSize();
-        label.setBounds(70, 50, size.width, size.height);
+        label.setBounds(450, 50, size.width+10, size.height+10);
         panel.add(label);
 
-        JLabel label1 = new JLabel("Manage"); 
+        JLabel label1 = new JLabel("-------------------------------------------------------Manage-------------------------------------------------------");
         size = label1.getPreferredSize();
         label1.setBounds(70, 130, size.width, size.height);
         panel.add(label1);
@@ -70,12 +77,11 @@ public class Menu extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 Order order = new Order();
-                // frame.dispose();
 //                ingredient.setVisible(true);
             }
         });
 
-        Btn4.setBounds(670, 180, 180, 50);
+        Btn4.setBounds(70, 250, 180, 50);
         panel.add(Btn4);
         Btn4.addActionListener(new ActionListener() {
             @Override
@@ -86,12 +92,23 @@ public class Menu extends JFrame{
             }
         });
 
-        JLabel label2 = new JLabel("Customer"); 
+        Btn7.setBounds(270, 250, 180, 50);
+        panel.add(Btn7);
+        Btn7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Position position = new Position();
+                // frame.dispose();
+//                beverage.setVisible(true);
+            }
+        });
+
+        JLabel label2 = new JLabel("------------------------------------------------------Customer------------------------------------------------------");
         size = label2.getPreferredSize();
-        label2.setBounds(70, 330, size.width, size.height);
+        label2.setBounds(70, 400, size.width, size.height);
         panel.add(label2);
 
-        Btn5.setBounds(70, 380, 180, 50);
+        Btn5.setBounds(70, 450, 180, 50);
         panel.add(Btn5);
         Btn5.addActionListener(new ActionListener() {
             @Override
@@ -100,7 +117,7 @@ public class Menu extends JFrame{
             }
         });
 
-        Btn6.setBounds(270, 380, 180, 50);
+        Btn6.setBounds(270, 450, 180, 50);
         panel.add(Btn6);
         Btn6.addActionListener(new ActionListener() {
             @Override
@@ -109,10 +126,5 @@ public class Menu extends JFrame{
 
             }
         });
-
-        frame.setSize(new Dimension(1000 ,700));
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 }

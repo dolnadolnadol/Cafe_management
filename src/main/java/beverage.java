@@ -23,6 +23,7 @@ public class beverage extends javax.swing.JFrame {
      */
     public beverage(){
         setTitle("Beverage : หมีภู คาเฟ่");
+        setLocationRelativeTo(null);
         try
         {
             setUIFont(new javax.swing.plaf.FontUIResource("Tahoma", Font.PLAIN,14));
@@ -291,7 +292,7 @@ public class beverage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
 
@@ -317,7 +318,7 @@ public class beverage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }
@@ -360,7 +361,7 @@ public class beverage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }

@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
@@ -259,7 +261,7 @@ public class customer extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
 
@@ -282,7 +284,7 @@ public class customer extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }
@@ -304,7 +306,7 @@ public class customer extends javax.swing.JFrame {
         // statement = con.connect().prepareStatement("Insert into beverage(B_id,B_name,Price,B_qty) Values (?,?,?,?)");
         try {
             con.connect();
-            statement = con.getConnection().prepareStatement("Update customer set C_id=?, C_name=? where B_id=?");
+            statement = con.getConnection().prepareStatement("Update customer set C_id=?, C_name=? where C_id=?");
             statement.setString(1, id);
             statement.setString(2, name);
             statement.setString(3, id);
@@ -318,7 +320,7 @@ public class customer extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }

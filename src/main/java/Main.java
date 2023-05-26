@@ -38,7 +38,7 @@ public class Main {
 
         JLabel label = new JLabel("หมีภู คาเฟ่");
         Dimension size = label.getPreferredSize();
-        label.setBounds(200, 100, size.width, size.height);
+        label.setBounds(195, 100, size.width, size.height);
         panel.add(label);
 
         label = new JLabel("ยินดีต้อนรับ !!");

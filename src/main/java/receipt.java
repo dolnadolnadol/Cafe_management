@@ -52,10 +52,10 @@ public class receipt extends javax.swing.JFrame {
 
             DefaultTableModel df = (DefaultTableModel)showTable.getModel();
             TableColumnModel columnModel = showTable.getColumnModel();
-            columnModel.getColumn(0).setPreferredWidth(50); // Id column width
-            columnModel.getColumn(1).setPreferredWidth(150); // Name column width
-            columnModel.getColumn(2).setPreferredWidth(80); // Price column width
-            columnModel.getColumn(3).setPreferredWidth(80);
+            columnModel.getColumn(0).setPreferredWidth(20); // Id column width
+            columnModel.getColumn(1).setPreferredWidth(100); // Name column width
+            columnModel.getColumn(2).setPreferredWidth(40); // Price column width
+            columnModel.getColumn(3).setPreferredWidth(60);
             showTable.setRowHeight(30);
             df.setRowCount(0);
             while(rs.next()){
@@ -64,7 +64,7 @@ public class receipt extends javax.swing.JFrame {
                     v2.add(rs.getString("R_id"));
                     v2.add(rs.getString("R_date"));
                     v2.add(rs.getString("Total"));
-                    v2.add(rs.getString("P_name"));
+                    v2.add(rs.getString("E_id"));
                 }
                 df.addRow(v2);
             }
@@ -129,11 +129,11 @@ public class receipt extends javax.swing.JFrame {
                         {null, null, null, null}
                 },
                 new String [] {
-                        "Id", "Date", "Total", "Position"
+                        "Id", "Date", "Total", "Employee id"
                 })
         {
             boolean[] canEdit = new boolean [] {
-                    false, false, false, false
+                    false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,9 +181,9 @@ public class receipt extends javax.swing.JFrame {
 
         jLabel4.setText("Total");
 
-        position_text.setText("Position");
+        position_text.setText("Employee id");
 
-        jLabel5.setText("YOU CAN'T MODIFY, DELETE, ADD RECEIPT !");
+//        jLabel5.setText("YOU CAN'T MODIFY, DELETE, ADD RECEIPT !");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,10 +276,60 @@ public class receipt extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void newBtnActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        String id = R_id_field.getText();
+        String name = R_date_field.getText();
+        String qty = Total_field.getText();
+        String qty2 = position_field.getText();
+        try {
+            con.connect();
+            statement = con.getConnection().prepareStatement("Insert into receipt(R_id,R_date,Total,E_id) Values (?,?,?,?)");
+            statement.setString(1, id);
+            statement.setString(2, name);
+            statement.setString(3, qty);
+            statement.setString(4, qty2);
+
+            int i = statement.executeUpdate();
+            if(i==1){
+                JOptionPane.showMessageDialog(this, "Complete");
+                R_id_field.setText("");
+                R_date_field.setText("");
+                Total_field.setText("");
+                position_field.setText("");
+                Fetch();
+            }else{
+                JOptionPane.showMessageDialog(this, "error");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "error");
+            e.printStackTrace();
+        }
 
     }
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        String id = R_id_field.getText();
+        try {
+            con.connect();
+            statement = con.getConnection().prepareStatement("Delete from cafe.Receipt where R_id=?");
+            statement.setString(1, id);
+
+            int i = statement.executeUpdate();
+            if(i==1){
+                JOptionPane.showMessageDialog(this, "Complete");
+                R_id_field.setText("");
+                R_date_field.setText("");
+                Total_field.setText("");
+                position_field.setText("");
+                Fetch();
+            }else{
+                JOptionPane.showMessageDialog(this, "error");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "error");
+            e.printStackTrace();
+        }
     }
     private void showTableMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
@@ -296,6 +346,34 @@ public class receipt extends javax.swing.JFrame {
         position_field.setText(tbqty);
     }
     private void modifyBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        String id = R_id_field.getText();
+        String B_id = R_date_field.getText();
+        String Total = Total_field.getText();
+        String quantity = position_field.getText();
+
+        try {
+            con.connect();
+            statement = con.getConnection().prepareStatement("Update cafe.receipt set R_id=?, R_date=?, Total =?, E_id=? where R_id=?");
+            statement.setString(1, id);
+            statement.setString(2, B_id);
+            statement.setString(3, Total);
+            statement.setString(4, quantity);
+//            statement.setString(6, receipt);
+            statement.setString(5, id);
+
+            int i = statement.executeUpdate();
+
+            if(i==1){
+                JOptionPane.showMessageDialog(this, "Complete");
+                Fetch();
+            }else{
+                JOptionPane.showMessageDialog(this, "error");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "error");
+            e.printStackTrace();
+        }
 
     }
     private void backBtnBtnActionPerformed(java.awt.event.ActionEvent evt) {

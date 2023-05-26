@@ -63,7 +63,7 @@ public class Order extends javax.swing.JFrame {
                     v2.add(rs.getString("B_id"));
                     v2.add(rs.getString("Total"));
                     v2.add(rs.getString("Order_qty"));
-                    v2.add(rs.getString("C_id"));
+//                    v2.add(rs.getString("C_id"));
                     v2.add(rs.getString("R_id"));
                 }
                 df.addRow(v2);
@@ -104,7 +104,7 @@ public class Order extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+//        jTextField4 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -124,20 +124,20 @@ public class Order extends javax.swing.JFrame {
 
         showTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null}
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null}
                 },
                 new String [] {
-                        "Id", "Beverage id", "Total", "Quantity", "Customer id", "Receipt id"
+                        "Id", "Beverage id", "Total", "Quantity", "Receipt id"
                 })
         {
             boolean[] canEdit = new boolean [] {
-                    false, true, true, true, true, true
+                    false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -187,9 +187,9 @@ public class Order extends javax.swing.JFrame {
 
         jLabel5.setText("Quantity");
 
-        jLabel6.setText("Customer id");
+        jLabel6.setText("Receipt id");
 
-        jLabel7.setText("Receipt id");
+//        jLabel7.setText("Receipt id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,8 +222,9 @@ public class Order extends javax.swing.JFrame {
                                                                         .addComponent(jLabel4)
                                                                         .addComponent(jLabel6)
                                                                         .addComponent(jLabel7))
-                                                                .addGap(25, 25, 25)
-                                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+//                                                                .addGap(25, 25, 25)
+//                                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        ))
                                                 .addContainerGap(78, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -263,18 +264,19 @@ public class Order extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jLabel4)
                                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(21, 21, 21)
+                                                .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jLabel5)
                                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
+                                                .addGap(20, 20, 20)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jLabel6)
                                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jLabel7)
-                                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                )
                                                 .addGap(132, 132, 132)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,17 +299,17 @@ public class Order extends javax.swing.JFrame {
         String B_id = R_date_field.getText();
         String Total = jTextField1.getText();
         String quantity = jTextField2.getText();
-        String customer_id = jTextField3.getText();
-        String receipt = jTextField4.getText();
+        String receipt = jTextField3.getText();
+//        String receipt = jTextField4.getText();
         try {
             con.connect();
-            statement = con.getConnection().prepareStatement("Insert into cafe.Order(Order_id,B_id,Total,Order_qty,C_id,R_id) Values (?,?,?,?,?,?)");
+            statement = con.getConnection().prepareStatement("Insert into cafe.Order(Order_id,B_id,Total,Order_qty,R_id) Values (?,?,?,?,?)");
             statement.setString(1, id);
             statement.setString(2, B_id);
             statement.setString(3, Total);
             statement.setString(4, quantity);
-            statement.setString(5, customer_id);
-            statement.setString(6, receipt);
+            statement.setString(5, receipt);
+//            statement.setString(6, receipt);
 
             int i = statement.executeUpdate();
             if(i==1){
@@ -317,13 +319,13 @@ public class Order extends javax.swing.JFrame {
                 jTextField1.setText("");
                 jTextField2.setText("");
                 jTextField3.setText("");
-                jTextField4.setText("");
+//                jTextField4.setText("");
                 Fetch();
             }else{
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
 
@@ -345,13 +347,13 @@ public class Order extends javax.swing.JFrame {
                 jTextField1.setText("");
                 jTextField2.setText("");
                 jTextField3.setText("");
-                jTextField4.setText("");
+//                jTextField4.setText("");
                 Fetch();
             }else{
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }
@@ -364,14 +366,14 @@ public class Order extends javax.swing.JFrame {
         String tbPrice = tb.getValueAt(showTable.getSelectedRow(),2).toString();
         String tbqty = tb.getValueAt(showTable.getSelectedRow(),3).toString();
         String tbqty1 = tb.getValueAt(showTable.getSelectedRow(),4).toString();
-        String tbqty2 = tb.getValueAt(showTable.getSelectedRow(),5).toString();
+//        String tbqty2 = tb.getValueAt(showTable.getSelectedRow(),5).toString();
 
         R_id_field.setText(tbId);
         R_date_field.setText(tbName);
         jTextField1.setText(tbPrice);
         jTextField2.setText(tbqty);
         jTextField3.setText(tbqty1);
-        jTextField4.setText(tbqty2);
+//        jTextField4.setText(tbqty2);
     }
     private void modifyBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -379,18 +381,18 @@ public class Order extends javax.swing.JFrame {
         String B_id = R_date_field.getText();
         String Total = jTextField1.getText();
         String quantity = jTextField2.getText();
-        String customer_id = jTextField3.getText();
-        String receipt = jTextField4.getText();
+        String receipt = jTextField3.getText();
+//        String receipt = jTextField4.getText();
         try {
             con.connect();
-            statement = con.getConnection().prepareStatement("Update cafe.Order set Order_id=?, B_id=?, Total =?, Order_qty=?, C_id=?, R_id=? where Order_id=?");
+            statement = con.getConnection().prepareStatement("Update cafe.Order set Order_id=?, B_id=?, Total =?, Order_qty=?, R_id=? where Order_id=?");
             statement.setString(1, id);
             statement.setString(2, B_id);
             statement.setString(3, Total);
             statement.setString(4, quantity);
-            statement.setString(5, customer_id);
-            statement.setString(6, receipt);
-            statement.setString(7, id);
+            statement.setString(5, receipt);
+//            statement.setString(6, receipt);
+            statement.setString(6, id);
 
             int i = statement.executeUpdate();
 
@@ -401,7 +403,7 @@ public class Order extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }
@@ -448,7 +450,7 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+//    private javax.swing.JTextField jTextField4;
     private javax.swing.JButton modifyBtn;
     private javax.swing.JButton newBtn;
     private javax.swing.JTable showTable;

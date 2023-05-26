@@ -278,7 +278,7 @@ public class Ingredient extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
 
@@ -303,7 +303,7 @@ public class Ingredient extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }
@@ -342,7 +342,7 @@ public class Ingredient extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "error");
             }
         } catch (SQLException e) {
-            System.out.println("IN ERROR");
+            JOptionPane.showMessageDialog(this, "error");
             e.printStackTrace();
         }
     }
